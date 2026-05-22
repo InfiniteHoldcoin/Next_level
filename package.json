@@ -1,0 +1,35 @@
+{
+  "name": "nextlevel",
+  "version": "0.0.1",
+  "private": true,
+  "description": "NextLevel — AI marketing agency platform (multi-tenant)",
+  "packageManager": "pnpm@9.12.0",
+  "engines": {
+    "node": ">=20.10.0",
+    "pnpm": ">=9.0.0"
+  },
+  "scripts": {
+    "dev": "pnpm -r --parallel dev",
+    "build": "pnpm -r build",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "format": "biome format --write .",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "test:rls": "pnpm --filter @nextlevel/db test:rls",
+    "test:eval": "promptfoo eval",
+    "db:generate": "pnpm --filter @nextlevel/db generate",
+    "db:migrate": "pnpm --filter @nextlevel/db migrate && pnpm --filter @nextlevel/db rls:apply",
+    "db:push": "pnpm --filter @nextlevel/db push && pnpm --filter @nextlevel/db rls:apply",
+    "db:rls": "pnpm --filter @nextlevel/db rls:apply",
+    "db:studio": "pnpm --filter @nextlevel/db studio",
+    "clean": "pnpm -r exec rm -rf node_modules dist .next .turbo && rm -rf node_modules"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "typescript": "^5.6.3",
+    "tsx": "^4.19.2",
+    "vitest": "^2.1.4",
+    "promptfoo": "^0.102.0"
+  }
+}

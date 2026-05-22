@@ -1,0 +1,25 @@
+description: "Hello-world — smoke test LLM connectivity + prompt cache"
+
+providers:
+  - id: anthropic:messages:claude-haiku-4-5-20251001
+    config:
+      max_tokens: 64
+      # Verify prompt caching header is accepted (ephemeral cache_control)
+      system:
+        - type: text
+          text: "You are a test assistant. Answer concisely."
+          cache_control:
+            type: ephemeral
+
+prompts:
+  - "Reply with exactly the two words: hello world"
+
+tests:
+  - description: "Response contains 'hello world'"
+    assert:
+      - type: icontains
+        value: "hello"
+      - type: icontains
+        value: "world"
+      - type: javascript
+        value: "output.split(/\s+/).length <= 6"

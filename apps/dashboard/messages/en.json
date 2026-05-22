@@ -1,0 +1,49 @@
+{
+  "nav": {
+    "overview": "Overview", "connections": "My connections", "agents": "My agents",
+    "reports": "Reports", "messages": "Messages", "settings": "Settings"
+  },
+  "layout": { "brand": "NextLevel", "tagline": "AI Agency", "header": "Dashboard" },
+  "home": {
+    "welcome": "Welcome to NextLevel",
+    "subtitle": "Our team is configuring your AI agents. You'll be notified when they're ready.",
+    "statusPending": "Awaiting configuration",
+    "statusPendingDesc": "Our team will contact you within 24 hours to schedule a discovery meeting.",
+    "connectionsLabel": "Connections", "agentsLabel": "Active agents", "reportsLabel": "Reports"
+  },
+  "login": {
+    "title": "Sign in to NextLevel", "subtitle": "Receive a magic link by email.",
+    "emailPlaceholder": "you@example.com", "sending": "Sending…", "submit": "Send magic link",
+    "success": "Check your inbox.", "unknownError": "Unknown error"
+  },
+  "onboarding": {
+    "step1Title": "What type of business?",
+    "step1Subtitle": "Choose what best describes your activity.",
+    "products": "Product sales", "productsDesc": "Online store, e-commerce, Shopify",
+    "services": "Service sales", "servicesDesc": "Salon, clinic, restaurant, consultant",
+    "step2Title": "Your business",
+    "companyNameLabel": "Business name", "companyNamePlaceholder": "Ex: Marie-Pier Salon",
+    "websiteUrlLabel": "Website (optional)", "websiteUrlPlaceholder": "https://yoursite.com",
+    "cityLabel": "City (optional)", "cityPlaceholder": "Ex: Montreal",
+    "step3Title": "You're all set!",
+    "step3Desc": "Your account is created. Our team will contact you within 24 hours to schedule your discovery meeting.",
+    "next": "Continue", "back": "Back", "submit": "Finish", "submitting": "Creating…",
+    "goToDashboard": "Go to my dashboard", "error": "An error occurred. Please try again."
+  },
+  "connections": {
+    "title": "My connections", "subtitle": "Connect your data so our agents can work for you.",
+    "empty": "No connections yet.", "emptyDesc": "Our team will guide you during the discovery meeting."
+  },
+  "agents": {
+    "title": "My agents", "subtitle": "Your AI agents configured by the NextLevel team.",
+    "empty": "No active agents yet.", "emptyDesc": "Agents will be configured after your discovery meeting."
+  },
+  "reports": {
+    "title": "Reports", "subtitle": "Your agents' results this month.",
+    "empty": "No reports available.", "emptyDesc": "Reports will appear once your agents are active."
+  },
+  "messages": {
+    "title": "Messages", "subtitle": "Communicate with the NextLevel team.",
+    "empty": "No messages yet.", "emptyDesc": "Our team will contact you here after your discovery meeting."
+  }
+}

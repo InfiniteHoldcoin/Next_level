@@ -1,0 +1,28 @@
+# Dependencies — reinstalled inside the container
+node_modules
+.pnpm-store
+
+# Secrets — never in the image
+.env
+.env.local
+.env.production
+
+# Build outputs
+dist
+.next
+.turbo
+*.tsbuildinfo
+
+# Dev / CI
+.git
+.github
+evals
+promptfooconfig.yaml
+
+# Local infra (Langfuse Docker for local dev only)
+infra/langfuse
+
+# Misc
+*.log
+.DS_Store
+Thumbs.db

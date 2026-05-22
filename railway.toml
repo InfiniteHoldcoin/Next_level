@@ -1,0 +1,48 @@
+# Railway — API service configuration
+# Docs: https://docs.railway.app/reference/config-as-code
+
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "apps/api/Dockerfile"
+
+[deploy]
+healthcheckPath = "/health"
+healthcheckTimeout = 300
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 3
+
+# --- Environment variables to set in Railway dashboard ---
+# Required:
+#   NODE_ENV                    = production
+#   SUPABASE_DB_URL             = postgres://... (Supabase → Settings → Database → URI → "Transaction" mode)
+#   SUPABASE_URL                = https://<ref>.supabase.co
+#   SUPABASE_JWT_SECRET         = (Supabase → Settings → API → JWT Secret)
+#   SUPABASE_SERVICE_ROLE_KEY   = (Supabase → Settings → API → service_role key — KEEP SECRET)
+#   ADMIN_SECRET                = (generate: openssl rand -base64 32) — protects /admin/* routes
+#   ANTHROPIC_API_KEY           = sk-ant-...
+#   CORS_ORIGIN                 = https://<dashboard>.vercel.app,https://<admin>.vercel.app
+#
+# Optional (Phase 2):
+#   INNGEST_EVENT_KEY       = (from Inngest dashboard)
+#   INNGEST_SIGNING_KEY     = (from Inngest dashboard)
+#   RESEND_API_KEY          = (for magic-link emails via Resend)
+#   RESEND_FROM_EMAIL       = noreply@yourdomain.com
+#   VOYAGE_API_KEY          = (for embeddings — Phase 2)
+#   LANGFUSE_HOST           = https://<langfuse-railway-service>.railway.app
+#   LANGFUSE_PUBLIC_KEY     = (from Langfuse dashboard)
+#   LANGFUSE_SECRET_KEY     = (from Langfuse dashboard)
+#
+# Railway auto-injects:
+#   PORT                    = set automatically by Railway (no need to configure)
+
+# --- Langfuse setup on Railway (separate service) ---
+# 1. Create a new Railway project service → "Deploy from Docker image"
+# 2. Image: langfuse/langfuse:2
+# 3. Add a PostgreSQL plugin to that service
+# 4. Set env vars on the Langfuse service:
+#      DATABASE_URL      = ${{Postgres.DATABASE_URL}} (Railway variable reference)
+#      NEXTAUTH_URL      = https://<langfuse-service>.railway.app
+#      NEXTAUTH_SECRET   = <random 32+ char string>
+#      SALT              = <random 32+ char string>
+#      TELEMETRY_ENABLED = false
+# 5. Copy the Langfuse public/secret keys → paste in API service env vars above

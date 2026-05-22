@@ -1,0 +1,55 @@
+{
+  "nav": {
+    "overview": "Vue d'ensemble",
+    "connections": "Mes connexions",
+    "agents": "Mes agents",
+    "reports": "Rapports",
+    "messages": "Messages",
+    "settings": "Paramètres"
+  },
+  "layout": { "brand": "NextLevel", "tagline": "Agence IA", "header": "Tableau de bord" },
+  "home": {
+    "welcome": "Bienvenue sur NextLevel",
+    "subtitle": "Notre équipe configure vos agents IA. Vous serez notifié dès qu'ils sont prêts.",
+    "statusPending": "En attente de configuration",
+    "statusPendingDesc": "Notre équipe vous contactera sous 24h pour planifier un meeting de découverte.",
+    "connectionsLabel": "Connexions", "agentsLabel": "Agents actifs", "reportsLabel": "Rapports"
+  },
+  "login": {
+    "title": "Connexion NextLevel",
+    "subtitle": "Recevez un lien magique par courriel.",
+    "emailPlaceholder": "vous@exemple.com",
+    "sending": "Envoi…", "submit": "Envoyer le lien",
+    "success": "Vérifiez votre boîte courriel.", "unknownError": "Erreur inconnue"
+  },
+  "onboarding": {
+    "step1Title": "Quel type d'entreprise?",
+    "step1Subtitle": "Choisissez ce qui décrit le mieux votre activité.",
+    "products": "Vente de produits", "productsDesc": "Boutique en ligne, e-commerce, Shopify",
+    "services": "Vente de services", "servicesDesc": "Salon, clinique, restaurant, consultant",
+    "step2Title": "Votre entreprise",
+    "companyNameLabel": "Nom de l'entreprise", "companyNamePlaceholder": "Ex: Salon Marie-Pier",
+    "websiteUrlLabel": "Site web (optionnel)", "websiteUrlPlaceholder": "https://votresite.com",
+    "cityLabel": "Ville (optionnel)", "cityPlaceholder": "Ex: Montréal",
+    "step3Title": "Vous êtes prêt!",
+    "step3Desc": "Votre compte est créé. Notre équipe vous contactera sous 24 heures pour planifier votre meeting de découverte.",
+    "next": "Continuer", "back": "Retour", "submit": "Terminer", "submitting": "Création en cours…",
+    "goToDashboard": "Accéder à mon tableau de bord", "error": "Une erreur est survenue. Veuillez réessayer."
+  },
+  "connections": {
+    "title": "Mes connexions", "subtitle": "Connectez vos données pour que nos agents puissent travailler pour vous.",
+    "empty": "Aucune connexion pour l'instant.", "emptyDesc": "Notre équipe vous guidera lors du meeting de découverte."
+  },
+  "agents": {
+    "title": "Mes agents", "subtitle": "Vos agents IA configurés par l'équipe NextLevel.",
+    "empty": "Aucun agent actif pour l'instant.", "emptyDesc": "Nos agents seront configurés après votre meeting de découverte."
+  },
+  "reports": {
+    "title": "Rapports", "subtitle": "Résultats de vos agents ce mois-ci.",
+    "empty": "Aucun rapport disponible.", "emptyDesc": "Les rapports apparaîtront dès que vos agents seront actifs."
+  },
+  "messages": {
+    "title": "Messages", "subtitle": "Communiquez avec l'équipe NextLevel.",
+    "empty": "Aucun message pour l'instant.", "emptyDesc": "Notre équipe vous contactera ici après votre meeting de découverte."
+  }
+}
