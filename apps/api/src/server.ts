@@ -1,22 +1,27 @@
-import Fastify, { type FastifyError } from 'fastify';
+import cookie from '@fastify/cookie';
 import cors from '@fastify/cors';
 import helmet from '@fastify/helmet';
-import sensible from '@fastify/sensible';
-import rateLimit from '@fastify/rate-limit';
-import cookie from '@fastify/cookie';
-import { serializerCompiler, validatorCompiler, type ZodTypeProvider } from 'fastify-type-provider-zod';
-import { logger, AppError } from '@nextlevel/shared';
-import { env } from './env.js';
-import { tenantContextPlugin } from './plugins/tenant-context.js';
-import { authPlugin } from './plugins/auth.js';
-import { healthRoutes } from './routes/health.js';
-import { authRoutes } from './routes/auth.js';
-import { inngestRoutes } from './routes/inngest.js';
-import { onboardingRoutes } from './routes/onboarding.js';
-import { dataRoutes } from './routes/data.js';
-import { messageRoutes } from './routes/messages.js';
-import { adminRoutes } from './routes/admin.js';
 import multipart from '@fastify/multipart';
+import rateLimit from '@fastify/rate-limit';
+import sensible from '@fastify/sensible';
+import { AppError, logger } from '@nextlevel/shared';
+import Fastify, { type FastifyError } from 'fastify';
+import {
+  type ZodTypeProvider,
+  serializerCompiler,
+  validatorCompiler,
+} from 'fastify-type-provider-zod';
+import { env } from './env.js';
+import { authPlugin } from './plugins/auth.js';
+import { tenantContextPlugin } from './plugins/tenant-context.js';
+import { adminRoutes } from './routes/admin.js';
+import { authRoutes } from './routes/auth.js';
+import { dataRoutes } from './routes/data.js';
+import { healthRoutes } from './routes/health.js';
+import { inngestRoutes } from './routes/inngest.js';
+import { messageRoutes } from './routes/messages.js';
+import { onboardingRoutes } from './routes/onboarding.js';
+import { widgetRoutes } from './routes/widget.js';
 
 export async function buildServer() {
   const app = Fastify({
@@ -48,6 +53,7 @@ export async function buildServer() {
   await app.register(dataRoutes, { prefix: '/data' });
   await app.register(messageRoutes, { prefix: '/messages' });
   await app.register(adminRoutes, { prefix: '/admin' });
+  await app.register(widgetRoutes, { prefix: '/widget' });
 
   app.setErrorHandler((err: FastifyError, _req, reply) => {
     app.log.error({ err }, 'unhandled error');

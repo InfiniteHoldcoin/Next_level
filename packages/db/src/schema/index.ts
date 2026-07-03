@@ -5,3 +5,4 @@ export * from './prompts.js';
 export * from './approvals.js';
 export * from './learning.js';
 export * from './data.js';
+export * from './widget.js';
