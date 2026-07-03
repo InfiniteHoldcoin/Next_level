@@ -59,7 +59,7 @@ END$$;
 DO $$
 DECLARE t text;
 BEGIN
-  FOR t IN SELECT unnest(ARRAY['contacts', 'services'])
+  FOR t IN SELECT unnest(ARRAY['contacts', 'services', 'widget_messages'])
   LOOP
     EXECUTE format('ALTER TABLE %I ENABLE ROW LEVEL SECURITY', t);
     EXECUTE format('ALTER TABLE %I FORCE ROW LEVEL SECURITY', t);
@@ -100,7 +100,8 @@ BEGIN
       'contacts',
       'services',
       'catalog_products',
-      'client_messages'
+      'client_messages',
+      'widget_messages'
     ])
   LOOP
     EXECUTE format('GRANT SELECT, INSERT, UPDATE, DELETE ON %I TO authenticated', t);
