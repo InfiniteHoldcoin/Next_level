@@ -43,6 +43,7 @@ coverage/
 .tmp/
 *.pem
 .doppler/
+.claude/
 
 # Generated
 *.generated.ts
