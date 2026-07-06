@@ -14,10 +14,16 @@
    vrai commit : 22 mai). Tout le code réel vit dans
    `nextlevel-workspace/nextlevel/`, mis à jour aujourd'hui même. Avoir deux
    copies divergentes du produit est la source principale de confusion.
-3. **Le vrai problème n° 2 : le système tourne mal depuis ~5 jours** (d'après
-   son propre `CONTEXT.md`) : `RESEND_API_KEY` introuvable (4 jours d'échecs
-   d'email Standup), CEO-JOURNAL silencieux depuis le 1er juillet, toutes les
-   queues vides → les Routines ont peut-être cessé de se déclencher.
+3. **Le vrai problème n° 2 (corrigé après retour d'Edouard, 2026-07-06) : les
+   Routines cloud tournent, mais la chaîne de livraison est à l'arrêt.**
+   Les loops DEV-A/B/C tournent depuis le terminal local d'Edouard — sans
+   crédits terminal, aucune livraison depuis 5 jours. Sans livraison, rien ne
+   déclenche l'Inspecteur QA (fire par le dev loop), donc QUALITY-LOG reste
+   vide, donc la Rétrospective n'a rien à analyser. Le silence du CEO-JOURNAL
+   s'explique aussi par la règle n° 6 (« écrire seulement si changement
+   réel »). S'ajoutent : `RESEND_API_KEY` introuvable (4 jours d'échecs
+   d'email Standup — bien réel, commits à l'appui) et la Rétrospective qui
+   n'a jamais réussi un run (cause probable identifiée, voir §2-C).
 4. **Le vrai problème n° 3 : structure d'agents incohérente** — 3 agents ont
    une définition formelle (`.claude/agents/*.yaml`), les ~10 autres ne sont
    que des prompts planifiés. C'est ÇA qui rend « ajouter/retirer un agent »
@@ -74,23 +80,44 @@ du dashboard et de l'admin, le middleware, la mémoire pgvector, etc.
 
 ---
 
-## 2. Les 3 actions urgentes (avant toute réorganisation)
+## 2. Les actions urgentes (avant toute réorganisation)
 
-### 🔴 A. Vérifier les Routines — le système est peut-être à l'arrêt
-`CONTEXT.md` (généré cette nuit) note : aucune entrée CEO-JOURNAL depuis le
-1er juillet, aucune livraison depuis 5 jours, toutes les queues vides.
-→ **Action Edouard :** claude.ai/code → Settings → Routines — vérifier que
-les 10 routines sont actives et regarder leurs derniers logs d'exécution.
+> Mise à jour 2026-07-06 après retour d'Edouard : les Routines tournent bien
+> — sauf deux. Inspecteur QA n'a encore jamais tourné (normal : il est
+> déclenché par les livraisons du dev loop, et il n'y en a pas eu ; démarrage
+> prévu ce soir 22h). Rétrospective n'a **jamais** réussi un run.
 
-### 🔴 B. RESEND_API_KEY introuvable — 4 jours d'échecs d'email
+### 🔴 A. RESEND_API_KEY introuvable — 4 jours d'échecs d'email
 Le Standup matinal échoue depuis 4 jours consécutifs (commits d'erreur dans
 le repo). → **Action Edouard :** remettre la clé dans l'environnement
 d'exécution des Routines (Settings → Environments → variables).
 
-### 🔴 C. TASK-017 gelée — décision requise
+### 🔴 B. Chaîne de livraison à l'arrêt — dépend des crédits terminal
+DEV-A/B/C tournent en local (`/loop` dans le terminal d'Edouard). Sans
+crédits, pas de livraisons → pas de QA → pas de données pour la Rétro.
+→ **Décision Edouard/Philip :** soit renouveler les crédits terminal, soit
+migrer les dev loops vers des Routines cloud (même mécanique, mais il faudra
+gérer la policy réseau du sandbox — voir TASK-017 ci-dessous).
+
+### 🔴 C. Rétrospective — cause probable de l'échec permanent identifiée
+`RETROSPECTIVE-LOOP.md` ÉTAPE 4 contient un bloc **PowerShell** (`$env:TEMP`,
+`Get-Date -Format`, continuations avec backticks) écrit pour un environnement
+**Windows** — mais les Routines s'exécutent dans un conteneur **Linux**. Un
+agent qui suit ces instructions à la lettre échoue à l'étape d'écriture de
+LESSONS-LEARNED.md. Incohérence secondaire : l'en-tête du fichier dit
+« Lundi 03h UTC (cron 0 3 * * 1) » alors qu'EQUIPE.md dit « hebdo lundi
+22h00 » — et Edouard indique qu'elle se déclenche par appel API. À aligner.
+→ **Fix simple :** remplacer le bloc PowerShell par l'équivalent bash (ou
+laisser l'agent utiliser git directement puisqu'il tourne dans un clone du
+repo). Je peux préparer ce correctif — il touche `RETROSPECTIVE-LOOP.md`
+dans `nextlevel-workspace`, donc je ne le pousse qu'avec votre accord.
+
+### 🟡 D. TASK-017 gelée — décision requise
 Bloquée 2 tentatives sur la validation des critères (politique réseau du
-sandbox, pas un bug produit). → **Action Edouard :** élargir la policy réseau
-de l'environnement, ou valider manuellement AC1/AC3.
+sandbox qui bloque *.vercel.app / *.up.railway.app, pas un bug produit).
+→ **Action Edouard :** élargir la policy réseau de l'environnement, ou
+valider manuellement AC1/AC3. Cette même policy réseau sera un prérequis si
+les dev loops migrent en cloud (voir B).
 
 ---
 
@@ -168,8 +195,9 @@ articles) lue par CEO Daily / Co-CEO / Sentinelle. À faire :
 
 ## 4. Ordre d'exécution proposé
 
-1. **Aujourd'hui (Edouard, 15 min)** : Routines + RESEND_API_KEY + TASK-017
-   (§2). Le système doit d'abord recommencer à tourner.
+1. **Aujourd'hui (Edouard, 15 min)** : RESEND_API_KEY + décision crédits
+   terminal vs dev loops cloud + fix Rétrospective (§2). La chaîne de
+   livraison doit d'abord recommencer à tourner.
 2. **Cette semaine** : archiver `next_level` (R1a). Une phrase dans EQUIPE.md
    pour annoncer la décision.
 3. **Semaine prochaine** : fiches d'agents uniformes + procédure
