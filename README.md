@@ -4,8 +4,7 @@
 
 📚 **Documentation complète** : [`/NextLevel-Vault/`](../NextLevel-Vault/)
 🎯 **Phase actuelle** : voir `../NextLevel-Vault/STATUS.md`
-🤖 **Reprendre une session** : voir [`CLAUDE.md`](./CLAUDE.md)
-🏛️ **Org des agents (pyramide)** : voir [`ORG-STRUCTURE.md`](./ORG-STRUCTURE.md)
+🤖 **Reprendre une session** : voir `../CLAUDE.md`
 
 ---
 
